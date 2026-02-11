@@ -1,0 +1,140 @@
+### Variáveis
+@baseUrl = http://localhost:3000/api
+@contentType = application/json
+
+### 1. Criar um novo Lead (Simulação)
+POST {{baseUrl}}/leads
+Content-Type: {{contentType}}
+
+{
+  "nomeCompleto": "João Silva",
+  "email": "joao.silva@email.com",
+  "telefone": "(11) 98765-4321",
+  "informacoesDaFatura": [
+    {
+      "codigoDaUnidadeConsumidora": "123456789",
+      "modeloFasico": "bifasico",
+      "enquadramento": "B1",
+      "historicoDeConsumoEmKWH": [
+        {
+          "consumoForaPontaEmKWH": 250.5,
+          "mesDoConsumo": "2024-01-01T00:00:00.000Z"
+        },
+        {
+          "consumoForaPontaEmKWH": 245.0,
+          "mesDoConsumo": "2024-02-01T00:00:00.000Z"
+        },
+        {
+          "consumoForaPontaEmKWH": 260.3,
+          "mesDoConsumo": "2024-03-01T00:00:00.000Z"
+        },
+        {
+          "consumoForaPontaEmKWH": 255.8,
+          "mesDoConsumo": "2024-04-01T00:00:00.000Z"
+        },
+        {
+          "consumoForaPontaEmKWH": 270.2,
+          "mesDoConsumo": "2024-05-01T00:00:00.000Z"
+        },
+        {
+          "consumoForaPontaEmKWH": 280.5,
+          "mesDoConsumo": "2024-06-01T00:00:00.000Z"
+        },
+        {
+          "consumoForaPontaEmKWH": 290.7,
+          "mesDoConsumo": "2024-07-01T00:00:00.000Z"
+        },
+        {
+          "consumoForaPontaEmKWH": 285.3,
+          "mesDoConsumo": "2024-08-01T00:00:00.000Z"
+        },
+        {
+          "consumoForaPontaEmKWH": 275.6,
+          "mesDoConsumo": "2024-09-01T00:00:00.000Z"
+        },
+        {
+          "consumoForaPontaEmKWH": 265.4,
+          "mesDoConsumo": "2024-10-01T00:00:00.000Z"
+        },
+        {
+          "consumoForaPontaEmKWH": 260.8,
+          "mesDoConsumo": "2024-11-01T00:00:00.000Z"
+        },
+        {
+          "consumoForaPontaEmKWH": 255.2,
+          "mesDoConsumo": "2024-12-01T00:00:00.000Z"
+        }
+      ]
+    }
+  ]
+}
+
+### 2. Listar todos os Leads
+GET {{baseUrl}}/leads
+Content-Type: {{contentType}}
+
+### 3. Listar Leads com filtro por nome
+GET {{baseUrl}}/leads?nomeCompleto=João
+Content-Type: {{contentType}}
+
+### 4. Listar Leads com filtro por email
+GET {{baseUrl}}/leads?email=joao
+Content-Type: {{contentType}}
+
+### 5. Listar Leads com filtro por código da unidade
+GET {{baseUrl}}/leads?codigoDaUnidadeConsumidora=123
+Content-Type: {{contentType}}
+
+### 6. Buscar Lead por ID (substitua <ID> pelo ID real)
+GET {{baseUrl}}/leads/<ID>
+Content-Type: {{contentType}}
+
+### 7. Criar Lead com múltiplas unidades
+POST {{baseUrl}}/leads
+Content-Type: {{contentType}}
+
+{
+  "nomeCompleto": "Maria Santos",
+  "email": "maria.santos@email.com",
+  "telefone": "21987654321",
+  "informacoesDaFatura": [
+    {
+      "codigoDaUnidadeConsumidora": "987654321",
+      "modeloFasico": "trifasico",
+      "enquadramento": "B2",
+      "historicoDeConsumoEmKWH": [
+        {"consumoForaPontaEmKWH": 350.5, "mesDoConsumo": "2024-01-01T00:00:00.000Z"},
+        {"consumoForaPontaEmKWH": 345.0, "mesDoConsumo": "2024-02-01T00:00:00.000Z"},
+        {"consumoForaPontaEmKWH": 360.3, "mesDoConsumo": "2024-03-01T00:00:00.000Z"},
+        {"consumoForaPontaEmKWH": 355.8, "mesDoConsumo": "2024-04-01T00:00:00.000Z"},
+        {"consumoForaPontaEmKWH": 370.2, "mesDoConsumo": "2024-05-01T00:00:00.000Z"},
+        {"consumoForaPontaEmKWH": 380.5, "mesDoConsumo": "2024-06-01T00:00:00.000Z"},
+        {"consumoForaPontaEmKWH": 390.7, "mesDoConsumo": "2024-07-01T00:00:00.000Z"},
+        {"consumoForaPontaEmKWH": 385.3, "mesDoConsumo": "2024-08-01T00:00:00.000Z"},
+        {"consumoForaPontaEmKWH": 375.6, "mesDoConsumo": "2024-09-01T00:00:00.000Z"},
+        {"consumoForaPontaEmKWH": 365.4, "mesDoConsumo": "2024-10-01T00:00:00.000Z"},
+        {"consumoForaPontaEmKWH": 360.8, "mesDoConsumo": "2024-11-01T00:00:00.000Z"},
+        {"consumoForaPontaEmKWH": 355.2, "mesDoConsumo": "2024-12-01T00:00:00.000Z"}
+      ]
+    },
+    {
+      "codigoDaUnidadeConsumidora": "111222333",
+      "modeloFasico": "monofasico",
+      "enquadramento": "B1",
+      "historicoDeConsumoEmKWH": [
+        {"consumoForaPontaEmKWH": 150.5, "mesDoConsumo": "2024-01-01T00:00:00.000Z"},
+        {"consumoForaPontaEmKWH": 145.0, "mesDoConsumo": "2024-02-01T00:00:00.000Z"},
+        {"consumoForaPontaEmKWH": 160.3, "mesDoConsumo": "2024-03-01T00:00:00.000Z"},
+        {"consumoForaPontaEmKWH": 155.8, "mesDoConsumo": "2024-04-01T00:00:00.000Z"},
+        {"consumoForaPontaEmKWH": 170.2, "mesDoConsumo": "2024-05-01T00:00:00.000Z"},
+        {"consumoForaPontaEmKWH": 180.5, "mesDoConsumo": "2024-06-01T00:00:00.000Z"},
+        {"consumoForaPontaEmKWH": 190.7, "mesDoConsumo": "2024-07-01T00:00:00.000Z"},
+        {"consumoForaPontaEmKWH": 185.3, "mesDoConsumo": "2024-08-01T00:00:00.000Z"},
+        {"consumoForaPontaEmKWH": 175.6, "mesDoConsumo": "2024-09-01T00:00:00.000Z"},
+        {"consumoForaPontaEmKWH": 165.4, "mesDoConsumo": "2024-10-01T00:00:00.000Z"},
+        {"consumoForaPontaEmKWH": 160.8, "mesDoConsumo": "2024-11-01T00:00:00.000Z"},
+        {"consumoForaPontaEmKWH": 155.2, "mesDoConsumo": "2024-12-01T00:00:00.000Z"}
+      ]
+    }
+  ]
+}

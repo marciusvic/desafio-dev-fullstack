@@ -1,0 +1,46 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8.0
+    container_name: newsun_mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: newsun_energy
+      MYSQL_USER: newsun
+      MYSQL_PASSWORD: newsun123
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - newsun_network
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: newsun_backend
+    restart: always
+    ports:
+      - '3000:3000'
+    environment:
+      DATABASE_URL: mysql://newsun:newsun123@mysql:3306/newsun_energy
+      PORT: 3000
+      NODE_ENV: development
+    depends_on:
+      - mysql
+    volumes:
+      - .:/app
+      - /app/node_modules
+    networks:
+      - newsun_network
+    command: sh -c "npx prisma migrate deploy && npm run start:dev"
+
+volumes:
+  mysql_data:
+
+networks:
+  newsun_network:
+    driver: bridge

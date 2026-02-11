@@ -1,0 +1,48 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "mysql"
+    url      = env("DATABASE_URL")
+}
+
+model Lead {
+    id           String   @id @default(uuid())
+    nomeCompleto String   @map("nome_completo")
+    email        String   @unique
+    telefone     String
+    createdAt    DateTime @default(now()) @map("created_at")
+    updatedAt    DateTime @updatedAt @map("updated_at")
+
+    unidades Unidade[]
+
+    @@map("leads")
+}
+
+model Unidade {
+    id                         String   @id @default(uuid())
+    codigoDaUnidadeConsumidora String   @unique @map("codigo_unidade_consumidora")
+    modeloFasico               String   @map("modelo_fasico")
+    enquadramento              String
+    leadId                     String   @map("lead_id")
+    createdAt                  DateTime @default(now()) @map("created_at")
+    updatedAt                  DateTime @updatedAt @map("updated_at")
+
+    lead               Lead      @relation(fields: [leadId], references: [id], onDelete: Cascade)
+    historicoDeConsumo Consumo[]
+
+    @@map("unidades")
+}
+
+model Consumo {
+    id                    String   @id @default(uuid())
+    consumoForaPontaEmKWH Float    @map("consumo_fora_ponta_kwh")
+    mesDoConsumo          DateTime @map("mes_consumo")
+    unidadeId             String   @map("unidade_id")
+    createdAt             DateTime @default(now()) @map("created_at")
+
+    unidade Unidade @relation(fields: [unidadeId], references: [id], onDelete: Cascade)
+
+    @@map("consumos")
+}
